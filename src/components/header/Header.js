@@ -1,6 +1,6 @@
 
 const Header = () =>{
-    const  text = ' React'
+    const  text = 'React'
     return (
         <div>
             <h1>
