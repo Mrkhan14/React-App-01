@@ -6,14 +6,14 @@ const MovieList = ({ data }) => {
 		<ul className='movie-list'>
 			{data.map(item =>(
 				// <MovieListItem
-				// 	key={item.name}
+				// 	key={item.id}
 				// 	name={item.name}
 				// 	viewers={item.viewers}
 				// 	favourite={item.favourite}
 				// />
 
 				// interpalatsiya yordamida malumotlarni yuborish
-				<MovieListItem {...item} key={item.name}/>
+				<MovieListItem {...item} key={item.id}/>
 			))}
 		</ul>
 	)
