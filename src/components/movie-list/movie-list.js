@@ -3,16 +3,19 @@ import './movie-list.css'
 
 const MovieList = ({ data }) => {
 	return (
-		<div className='movie-list list-group'>
-			{/*{data.map(item =>(*/}
-			{/*	<MovieListItem name={item.name}  viewers={item.viewers}/>*/}
-			{/*))}*/}
-			{data.map(item => {
-				return(
-					<MovieListItem name={item.name}  viewers={item.viewers}/>
-				)
-			})}
-		</div>
+		<ul className='movie-list'>
+			{data.map(item =>(
+				// <MovieListItem
+				// 	key={item.name}
+				// 	name={item.name}
+				// 	viewers={item.viewers}
+				// 	favourite={item.favourite}
+				// />
+
+				// interpalatsiya yordamida malumotlarni yuborish
+				<MovieListItem {...item} key={item.name}/>
+			))}
+		</ul>
 	)
 }
 

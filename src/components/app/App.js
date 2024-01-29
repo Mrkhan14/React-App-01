@@ -6,9 +6,9 @@ import SearchPanel from '../search-panel/search-panel'
 import './app.css'
 function App() {
 	const data=[
-		{ name: "mov1", viewers: 987},
-		{ name: "mov2", viewers: 887},
-		{ name: "mov4", viewers: 787}
+		{ name: "mov1", viewers: 987, favourite: false},
+		{ name: "mov2", viewers: 887,  favourite: false},
+		{ name: "mov4", viewers: 787,  favourite: true}
 	]
 
 	return (
