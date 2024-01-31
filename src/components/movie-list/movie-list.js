@@ -1,7 +1,7 @@
 import MovieListItem from '../movie-list-item/movie-list-item'
 import './movie-list.css'
 
-const MovieList = ({ data }) => {
+const MovieList = ({ data, onDelete }) => {
 	return (
 		<ul className='movie-list'>
 			{data.map(item =>(
@@ -13,7 +13,10 @@ const MovieList = ({ data }) => {
 				// />
 
 				// interpalatsiya yordamida malumotlarni yuborish
-				<MovieListItem {...item} key={item.id}/>
+				<MovieListItem
+					{...item} key={item.id}
+					onDelete={() => onDelete(item.id)}
+				/>
 			))}
 		</ul>
 	)
