@@ -14,10 +14,11 @@ class App extends  Component{
 			data2: [
 				{ id: 1, name: "mov1", viewers: 987, like: false, favourite: false},
 				{ id: 2, name: "ali", viewers: 887, like: false, favourite: false},
-				{ id: 3, name: "zaer", viewers: 787, like: false, favourite: true},
-				{ id: 4, name: "w", viewers: 787, like: true, favourite: true}
+				{ id: 3, name: "zaer", viewers: 787, like: true, favourite: false},
+				{ id: 4, name: "w", viewers: 787, like: true, favourite: false}
 			],
-			term: ''
+			term: '',
+			filter: 'all'
 
 		}
 	}
@@ -73,18 +74,35 @@ class App extends  Component{
 		})
 	}
 
+	filterHandeler = (arr, filter) => {
+		switch (filter){
+			case 'popular':
+				return arr.filter(c => c.like)
+			case 'mostViewrs':
+				return arr.filter(c => c.viewers > 800)
+			default:
+				return arr
+		}
+	}
+
+	// updatefilterHandeler = filter =>this.setState({filter})
+	updatefilterHandeler = (filter) => {
+		this.setState({
+			filter: filter
+		})
+	}
 	render() {
-		const {data2, term} = this.state
+		const {data2, term, filter} = this.state
 		const allmoviesCount = data2.length
 		const favouriteMMoviesCount = data2.filter(c => c.favourite).length
-		const visibleData = this.searchHandeler(data2, term)
+		const visibleData = this.filterHandeler(this.searchHandeler(data2, term), filter)
 		return (
 			<div className='app font-monospace'>
 				<div className='content'>
 					<AppInfo  allMoviesCount={allmoviesCount} favouriteMoviesCount={favouriteMMoviesCount} />
 					<div className='search-panel'>
 						<SearchPanel  updateTermHandelerr={this.updateTermHandeler}/>
-						<AppFilter />
+						<AppFilter  filterr={filter} updatefilterHandelerr={this.updatefilterHandeler}/>
 					</div>
 					<MovieList
 						data={visibleData}
