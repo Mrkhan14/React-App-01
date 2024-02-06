@@ -13,10 +13,12 @@ class App extends  Component{
 		this.state= {
 			data2: [
 				{ id: 1, name: "mov1", viewers: 987, like: false, favourite: false},
-				{ id: 2, name: "mov2", viewers: 887, like: false, favourite: false},
-				{ id: 3, name: "mov4", viewers: 787, like: false, favourite: true},
-				{ id: 4, name: "mov5", viewers: 787, like: true, favourite: true}
-			]
+				{ id: 2, name: "ali", viewers: 887, like: false, favourite: false},
+				{ id: 3, name: "zaer", viewers: 787, like: false, favourite: true},
+				{ id: 4, name: "w", viewers: 787, like: true, favourite: true}
+			],
+			term: ''
+
 		}
 	}
 
@@ -34,7 +36,6 @@ class App extends  Component{
 	// 		}
 	// 	})
 	// }
-
 
 	addForm = (item) =>{
 		this.setState(({data2 }) =>{
@@ -57,22 +58,36 @@ class App extends  Component{
 		}))
 	}
 
+	searchHandeler = (arr, term) => {
+		if (term.length === 0){
+			return arr
+		}
+		return arr.filter(item => {
+			return item.name.toLowerCase().indexOf(term) > -1
+		})
+	}
 
+	updateTermHandeler = (term) => {
+		this.setState({
+			term: term
+		})
+	}
 
 	render() {
-		const {data2} = this.state
+		const {data2, term} = this.state
 		const allmoviesCount = data2.length
 		const favouriteMMoviesCount = data2.filter(c => c.favourite).length
+		const visibleData = this.searchHandeler(data2, term)
 		return (
 			<div className='app font-monospace'>
 				<div className='content'>
 					<AppInfo  allMoviesCount={allmoviesCount} favouriteMoviesCount={favouriteMMoviesCount} />
 					<div className='search-panel'>
-						<SearchPanel />
+						<SearchPanel  updateTermHandelerr={this.updateTermHandeler}/>
 						<AppFilter />
 					</div>
 					<MovieList
-						data={data2}
+						data={visibleData}
 						onDelete={this.ondelete}
 						onTogProp={this.onTogProp}
 					/>
