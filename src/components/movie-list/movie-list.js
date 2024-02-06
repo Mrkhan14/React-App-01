@@ -1,7 +1,7 @@
 import MovieListItem from '../movie-list-item/movie-list-item'
 import './movie-list.css'
 
-const MovieList = ({ data, onDelete }) => {
+const MovieList = ({ data, onDelete, onTogProp }) => {
 	return (
 		<ul className='movie-list'>
 			{data.map(item =>(
@@ -16,6 +16,7 @@ const MovieList = ({ data, onDelete }) => {
 				<MovieListItem
 					{...item} key={item.id}
 					onDelete={() => onDelete(item.id)}
+					onTogProp={(e)=> onTogProp(item.id, e.currentTarget.getAttribute('data-toggle'))}
 				/>
 			))}
 		</ul>
