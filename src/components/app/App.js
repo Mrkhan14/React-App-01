@@ -6,7 +6,7 @@ import MovieList from '../movie-list/movie-list'
 import MoviesAddForm from '../movies-add-form/movies-add-form'
 import SearchPanel from '../search-panel/search-panel'
 import { v4 as uuidv4 } from 'uuid';
-import './app.css'
+import './App.css'
 class App extends  Component{
 	constructor(props) {
 		super(props)
