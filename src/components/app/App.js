@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import AppFilter from '../app-filter/app-filter'
 import AppInfo from '../app-info/app-info'
@@ -6,6 +6,7 @@ import MovieList from '../movie-list/movie-list'
 import MoviesAddForm from '../movies-add-form/movies-add-form'
 import SearchPanel from '../search-panel/search-panel'
 import { v4 as uuidv4 } from 'uuid';
+import { Context } from "../../context";
 import './App.css'
 
 const App = () =>{
@@ -13,6 +14,8 @@ const App = () =>{
 	const [term, setTerm] = useState('')
 	const [filter, setFilter] = useState('all')
 	const [isLoading, setIsLoading] = useState(false)
+
+	const {state, dispatch} = useContext(Context)
 
 	const ondelete = (id) =>{
 		const newArr = data2.filter(c => c.id !== id)
@@ -27,7 +30,7 @@ const App = () =>{
 
 	const onTogProp = (id, prop) =>{
 		const newArr = data2.map(item =>{
-			if (item.id == id){
+			if (item.id === id){
 				return{...item, [prop]: !item[prop]}
 			}
 			return item
@@ -76,6 +79,7 @@ const App = () =>{
 				favourite: false
 			}))
 			setData2(newArr2)
+			dispatch({type: 'GET_DATA', payload: newArr2})
 		})
 		.catch(err => console.log(err))
 		.finally(() => setIsLoading(false))
