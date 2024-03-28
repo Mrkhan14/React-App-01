@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import './movies-add-form.css'
+import { Context } from "../../context";
 
-const MoviesAddForm = ({addForm}) => {
+const MoviesAddForm = () => {
 	const [state, setState] = useState({ name: '', views: ''})
+
+	const { _, dispatch} = useContext(Context)
 
 	const changeHaelerInput = (e) => {
 		setState({...state, [e.target.name]:e.target.value})
@@ -14,7 +17,7 @@ const MoviesAddForm = ({addForm}) => {
 			return
 		}
 		const data = { name: state.name, viewers: state.views } 
-		addForm(data)
+		dispatch({type: 'ADD_FORM', payload: data})
 		setState({name: '', views: '',})
 	}
 
